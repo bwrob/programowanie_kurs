@@ -13,15 +13,12 @@
 
 
     [tool.poetry.dependencies]
-        python = ">=3.10,<3.14"
-
-        pandas-stubs = "^2.2.3.241126"
-        pandas       = "^2.2.3"
+        python = ">=3.9,<3.14"
         jupyter      = "^1.1.1"
         rich         = "^13.9.4"
         poethepoet   = "^0.32.1"
     pyinstrument = "^5.0.1"
-    matplotlib = "^3.10.1"
+    matplotlib = "^3.9"
 
 
 [tool.docformatter]
