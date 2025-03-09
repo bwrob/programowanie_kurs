@@ -13,12 +13,13 @@
 
 
     [tool.poetry.dependencies]
-        python = ">=3.9,<3.14"
-        jupyter      = "^1.1.1"
-        rich         = "^13.9.4"
-        poethepoet   = "^0.32.1"
-    pyinstrument = "^5.0.1"
-    matplotlib = "^3.9"
+        python       = ">=3.9"
+        jupyter      = "*"
+        rich         = "*"
+        pyinstrument = "*"
+        matplotlib   = "*"
+        numpy        = "*"
+        pandas       = "*"
 
 
 [tool.docformatter]

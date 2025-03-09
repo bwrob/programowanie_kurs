@@ -85,13 +85,32 @@
     "quarto.usePipQuarto": true,
     "ruff.configuration": "ruff.toml",
     "ruff.configurationPreference": "filesystemFirst",
+    "terminal.integrated.defaultProfile.windows": "GitBash",
     "terminal.integrated.fontSize": 16,
     "terminal.integrated.mouseWheelZoom": true,
+    "terminal.integrated.profiles.windows": {
+        "CommandPrompt": {
+            "args": [],
+            "icon": "terminal-cmd",
+            "path": [
+                "${env:windir}\\Sysnative\\cmd.exe",
+                "${env:windir}\\System32\\cmd.exe"
+            ]
+        },
+        "GitBash": {
+            "icon": "terminal-bash",
+            "path": "C:\\Program Files\\Git\\bin\\bash.exe"
+        },
+        "PowerShell": {
+            "icon": "terminal-powershell",
+            "source": "PowerShell"
+        }
+    },
     "terminal.integrated.tabs.enabled": false,
     "terminal.integrated.tabs.hideCondition": "never",
     "terminal.integrated.tabs.location": "right",
     "window.commandCenter": false,
-    "window.zoomLevel": 4,
+    "window.zoomLevel": 1,
     "workbench.activityBar.location": "top",
     "workbench.colorTheme": "PyCharm Night Theme",
     "workbench.editor.enablePreview": false,

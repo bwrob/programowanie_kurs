@@ -1,10 +1,8 @@
 {
     "recommendations": [
         "aaron-bond.better-comments",
-        "alexcvzz.vscode-sqlite",
         "bierner.markdown-mermaid",
         "charliermarsh.ruff",
-        "codeium.codeium",
         "davidanson.vscode-markdownlint",
         "detachhead.basedpyright",
         "file-icons.file-icons",
@@ -17,7 +15,6 @@
         "magicstack.magicpython",
         "ms-python.debugpy",
         "ms-python.python",
-        "ms-python.vscode-pylance",
         "ms-toolsai.jupyter-keymap",
         "ms-toolsai.jupyter-renderers",
         "ms-toolsai.jupyter",
@@ -27,9 +24,6 @@
         "ms-vscode.vs-keybindings",
         "nicohlr.pycharm",
         "oderwat.indent-rainbow",
-        "postman.postman-for-vscode",
-        "quarto.quarto",
-        "redhat.vscode-yaml",
         "richie5um2.vscode-sort-json",
         "tamasfe.even-better-toml",
         "yzhang.markdown-all-in-one"
