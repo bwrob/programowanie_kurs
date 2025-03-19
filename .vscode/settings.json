@@ -106,7 +106,7 @@
     "terminal.integrated.tabs.hideCondition": "never",
     "terminal.integrated.tabs.location": "right",
     "window.commandCenter": false,
-    "window.zoomLevel": 1,
+    "window.zoomLevel": 4,
     "workbench.activityBar.location": "top",
     "workbench.colorTheme": "PyCharm Night Theme",
     "workbench.editor.enablePreview": false,

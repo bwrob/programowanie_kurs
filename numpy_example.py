@@ -1,4 +1,5 @@
 import numpy as np
+from rich import print
 
 
 def numpy_example():
@@ -51,7 +52,7 @@ def numpy_example():
     print("Wycieta tablica:", wycieta_tablica)
 
     # Dwuwymiarowe wycinanie
-    wycieta_tablica_2d = tablica_2d[1:, 1:]
+    wycieta_tablica_2d = tablica_2d[1:2, 1:]
     print("Wycieta tablica 2D:\n", wycieta_tablica_2d)
 
     # Indeksowanie logiczne
