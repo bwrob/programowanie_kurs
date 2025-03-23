@@ -154,7 +154,7 @@ def lcm(a: int, b: int) -> int:
     :param b: Druga liczba całkowita
     :return: Najmniejsza wspólna wielokrotność a i b
     """
-    return a * b // gcd(a, b)
+    return a * b // gcd(a, b)by
 
 
 def lcm_multiple(numbers: list[int]) -> int:
