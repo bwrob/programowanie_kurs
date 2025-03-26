@@ -95,7 +95,7 @@ def xgcd_rekurencyjnie(a: int, b: int) -> tuple[int, int, int]:
     return d, y, x - (a // b) * y
 
 
-def rownanie_diofantyczne(a: int, b: int, c: int) -> tuple[int, int] | None:
+def rownanie_diofantyczne(a: int, b: int, c: int) :
     """Rozwiąż równanie diofantyczne ax + by = c.
 
     Używając rozszerzonego algorytmu Euklidesa.
@@ -133,7 +133,7 @@ def diofantyczne_nieujemne(a: int, b: int, c: int) -> set[tuple[int, int]]:
     }
 
 
-def skoczek_alfred(cel: int) -> tuple[str, int] | None:
+def skoczek_alfred(cel: int) -> tuple[str, int]:
     """Określ, czy Alfred może dotrzeć do celu, używając skoków o długości 84 cm lub 228 cm.
 
     :param cel: Odległość do celu w centymetrach
@@ -148,31 +148,16 @@ def skoczek_alfred(cel: int) -> tuple[str, int] | None:
 
 
 def lcm(a: int, b: int) -> int:
-    """Oblicz najmniejszą wspólną wielokrotność dwóch liczb całkowitych.
-
-    :param a: Pierwsza liczba całkowita
-    :param b: Druga liczba całkowita
-    :return: Najmniejsza wspólna wielokrotność a i b
-    """
-    return a * b // gcd(a, b)by
-
-
-def lcm_multiple(numbers: list[int]) -> int:
-    """Oblicz najmniejszą wspólną wielokrotność listy liczb całkowitych.
-
-    :param numbers: Lista liczb całkowitych
-    :return: Najmniejsza wspólna wielokrotność listy liczb całkowitych
-    """
-    return reduce(lcm, numbers)
+    """Oblicz najmniejszą wspólną wielokrotność dwóch liczb całkowitych."""
+    return a * b // gcd(a, b)
 
 
 def min_land_parts(k: int) -> int:
-    """Oblicz minimalną liczbę części, na które należy podzielić ziemię.
-
-    :param k: Liczba dzieci
-    :return: Minimalna liczba części
-    """
-    return lcm_multiple(range(1, k + 1))
+    """Oblicz minimalną liczbę części, na które należy podzielić ziemię."""
+    result = 1
+    for i in range(1,k+1):
+        result = lcm(result, i)
+    return result
 
 
 if __name__ == "__main__":
