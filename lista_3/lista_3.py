@@ -88,6 +88,16 @@ def liczby_doskonale(N):
     return doskonale
 
 
+def pary_zaprzyjaznione_cache(N):
+    pary = []
+    sumy = [0]*N
+    for a in range(N):
+        b = suma_dzielnikow(a)
+        sumy[a] = b
+        if b < a and sumy[b] == a:
+            pary.append((a, b))
+    return pary
+
 def pary_zaprzyjaznione(N):
     pary = []
     for a in range(1, N):
@@ -131,15 +141,32 @@ def sito_sundarama2(N):
 
 def zadanie_1():
     n = 10_000
-    print(czyniki_pierwsze(n))
+    #print(czyniki_pierwsze(n))
     # print(dzielniki(n))
-    print(suma_dzielnikow(n))
-    print(suma_dzielnikow_naiwna(n))
+    #print(suma_dzielnikow(n))
+    #print(suma_dzielnikow_naiwna(n))
     print(liczby_doskonale(n))
 
 
 def zadanie_2():
-    print(pary_zaprzyjaznione(10_000))
+    import time 
+    n = 10_000
+    methods = [pary_zaprzyjaznione, pary_zaprzyjaznione_cache,]
+
+    m = 5  # Number of repetitions
+    padding = max(len(method.__name__) for method in methods)
+    for method in methods:
+        total_time = 0
+        for _ in range(m):
+            start = time.perf_counter_ns()
+            _ = method(n)
+            end = time.perf_counter_ns()
+            total_time += end - start
+        avg_time = total_time / m
+        print(f"{method.__name__.ljust(padding)}: {str(avg_time).rjust(15)} ns")
+    
+    #print(pary_zaprzyjaznione(n))
+    print(pary_zaprzyjaznione_cache(n))
 
 
 def zadanie_3():
@@ -150,21 +177,22 @@ def zadanie_3():
 
     results = {}
     m = 100  # Number of repetitions
+    padding = max(len(method.__name__) for method in methods)
     for method in methods:
         total_time = 0
         for _ in range(m):
-            start = time.time()
+            start = time.perf_counter_ns()
             results[method.__name__] = method(n)
-            end = time.time()
+            end = time.perf_counter_ns()
             total_time += end - start
         avg_time = total_time / m
-        print(f"{method.__name__}: {avg_time:.8f} s (average over {m} runs)")
+        print(f"{method.__name__.ljust(padding)}: {str(avg_time).rjust(15)} ns")
 
     print(results[sito_eratostenesa.__name__] == results[sito_sundarama.__name__])
     print(results[sito_eratostenesa.__name__] == results[sito_sundarama2.__name__])
 
 
 if __name__ == "__main__":
-    # zadanie_1()
-    # zadanie_2()
+    zadanie_1()
+    zadanie_2()
     zadanie_3()
