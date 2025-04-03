@@ -1,8 +1,13 @@
 import gc
 import random
 from itertools import repeat
-from random import setstate  # Dodane importy
-from random import getstate, randrange, seed, shuffle
+from random import (
+    getstate,
+    randrange,
+    seed,
+    setstate,  # Dodane importy
+    shuffle,
+)
 from time import perf_counter
 
 
