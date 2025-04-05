@@ -37,7 +37,10 @@ def zadanie_1():
 
 
 # Funkcje pomocnicze do zadania 2
-def sortowanie_zliczanie(lista, klucze):
+def sortowanie_zliczanie(
+    lista,
+    klucze,
+):
     wystapienia = dict.fromkeys(klucze, 0)
     for element in lista:
         wystapienia[element] += 1
@@ -89,7 +92,10 @@ def sortowanie_wybieranie(lista, relacja=lambda x, y: x <= y):
             lista[i], lista[j] = lista[j], lista[i]
 
 
-def sortowanie_scalanie(lista, relacja=lambda x, y: x <= y):
+def sortowanie_scalanie(
+    lista,
+    relacja=lambda x, y: x <= y,
+):
     def scal(lista1, lista2):
         wynik = []
         n1 = len(lista1)
@@ -115,7 +121,11 @@ def sortowanie_scalanie(lista, relacja=lambda x, y: x <= y):
     return scal(l1, l2)
 
 
-def zmierz_raz_sortowanie(algorytm, lista, min_time=0.2):
+def zmierz_raz_sortowanie(
+    algorytm,
+    lista,
+    min_time=0.2,
+):
     czas = 0
     ile_teraz = 1
     stan_gc = gc.isenabled()
@@ -139,7 +149,12 @@ def zmierz_raz_sortowanie(algorytm, lista, min_time=0.2):
     return czas / ile_teraz
 
 
-def zmierz_min_sortowanie(algorytm, lista, serie_min=5, min_time=0.2):
+def zmierz_min_sortowanie(
+    algorytm,
+    lista,
+    serie_min=5,
+    min_time=0.2,
+):
     pomiary = []
     generator = getstate()
     seed()
@@ -151,7 +166,13 @@ def zmierz_min_sortowanie(algorytm, lista, serie_min=5, min_time=0.2):
     return min(pomiary)
 
 
-def zmierz_sortowanie(algorytm, lista, serie_median=10, serie_min=5, min_time=0.2):
+def zmierz_sortowanie(
+    algorytm,
+    lista,
+    serie_median=10,
+    serie_min=5,
+    min_time=0.2,
+):
     pomiary = []
     lista = lista.copy()
     for _ in repeat(None, serie_median):
