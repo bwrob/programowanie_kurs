@@ -1,5 +1,13 @@
+#!/usr/bin/env python3
+"""Provide functions for encoding and decoding messages using a Caesar cipher.
+
+Calculate Levenshtein distance and guess the most similar string from a list.
+"""
+
+import time
 from collections import Counter
 
+import numpy as np
 import rich
 
 __FREQ = {
@@ -70,14 +78,14 @@ def test_dekoduj():
 
 def porównaj(freq1, freq2):
     delta = 0
-    for litera, częstość in freq1.items():
+    for litera, czestosc in freq1.items():
         if litera not in freq2:
-            delta += częstość
+            delta += czestosc
         else:
-            delta += abs(częstość - freq2[litera])
-    for litera, częstość in freq2.items():
+            delta += abs(czestosc - freq2[litera])
+    for litera, czestosc in freq2.items():
         if litera not in freq1:
-            delta += częstość
+            delta += czestosc
     return delta
 
 
@@ -101,9 +109,6 @@ def odległości_dla_kluczy(napis: str) -> dict[int, float]:
 
 def zad_1():
     odleglosci_dict = odległości_dla_kluczy(__MESSAGE)
-    print("Odległości dla kluczy:")
-    for k, v in odleglosci_dict.items():
-        print(f"Klucz {k}: {v}")
     print("Najmniejsza odległość:")
     min_key = min(odleglosci_dict, key=odleglosci_dict.get)
     print(f"Klucz {min_key}: {odleglosci_dict[min_key]}")
@@ -131,10 +136,27 @@ def levenshtein(napis1: str, napis2: str) -> int:
                     macierz[i][j - 1] + 1,  # Wstawienie
                     macierz[i - 1][j - 1] + 2,  # Zamiana
                 )
-    print("Macierz Levenshteina:")
-    rich.print(macierz)
 
     return macierz[len(napis1)][len(napis2)]
+
+
+def levenshtein_2(napis1: str, napis2: str) -> int:
+    """Funkcja oblicza odległość Levenshteina między dwoma napisami."""
+    len1, len2 = len(napis1), len(napis2)
+    macierz = np.zeros((len1 + 1, len2 + 1), dtype=int)
+
+    macierz[:, 0] = np.arange(len1 + 1)
+    macierz[0, :] = np.arange(len2 + 1)
+
+    for i, j in np.ndindex(len1, len2):
+        koszt = 0 if napis1[i] == napis2[j] else 2
+        macierz[i + 1, j + 1] = min(
+            macierz[i, j + 1] + 1,  # Usunięcie
+            macierz[i + 1, j] + 1,  # Wstawienie
+            macierz[i, j] + koszt,  # Zamiana
+        )
+
+    return macierz[len1, len2]
 
 
 def guess(napis: str, lista: list[str]) -> str:
@@ -147,14 +169,43 @@ def guess(napis: str, lista: list[str]) -> str:
 
 def zad_2() -> None:
     """Funkcja testująca odległość Levenshteina."""
-    napis_1 = "Ala"
-    napis_2 = "Olek"
+    napis_1 = "Ala ma kota i wspierających rodziców." * 50
+    napis_2 = "Olek ma dom, samochód i bogatych rodziców." * 50
+    iterations = 100
+
+    # Measure performance of levenshtein
+    times_levenshtein = []
+    for _ in range(iterations):
+        start = time.perf_counter()
+        levenshtein(napis_1, napis_2)
+        end = time.perf_counter()
+        times_levenshtein.append(end - start)
+
+    # Measure performance of levenshtein_2
+    times_levenshtein_2 = []
+    for _ in range(iterations):
+        start = time.perf_counter()
+        levenshtein_2(napis_1, napis_2)
+        end = time.perf_counter()
+        times_levenshtein_2.append(end - start)
+
     print(
-        f"Odległość Levenshteina między '{napis_1}' a '{napis_2}': "
-        f"{levenshtein(napis_1, napis_2)}",
+        f"Odległość Levenshteina między '{napis_1}' a '{napis_2}':\n"
+        f"{levenshtein(napis_1, napis_2)}\n"
+        f"{levenshtein_2(napis_1, napis_2)}",
     )
 
-    print("Zgadnij, który z napisów jest najbardziej podobny do 'Ala':")
+    print("\nPorównanie wydajności:")
+    print(
+        f"Levenshtein - Średni czas: {np.mean(times_levenshtein)}s, "
+        f"Minimalny czas: {np.min(times_levenshtein)}s",
+    )
+    print(
+        f"Levenshtein_2 - Średni czas: {np.mean(times_levenshtein_2)}s, "
+        f"Minimalny czas: {np.min(times_levenshtein_2)}s",
+    )
+
+    print("\nZgadnij, który z napisów jest najbardziej podobny do 'Ala':")
     lista = ["Olek", "Ola", "Ala ma kota"]
     print("Lista:", lista)
     print("Najbardziej podobne napisy:")
