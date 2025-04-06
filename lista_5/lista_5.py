@@ -1,5 +1,7 @@
 from collections import Counter
 
+import rich
+
 __FREQ = {
     "A": 0.099,
     "B": 0.0147,
@@ -109,7 +111,60 @@ def zad_1():
     print(dekoduj(__MESSAGE, min_key))
 
 
+def levenshtein(napis1: str, napis2: str) -> int:
+    """Funkcja oblicza odległość Levenshteina między dwoma napisami."""
+    len1, len2 = len(napis1), len(napis2)
+    macierz = [[0] * (len2 + 1) for _ in range(len1 + 1)]
+
+    for i in range(len1 + 1):
+        macierz[i][0] = i
+    for j in range(len2 + 1):
+        macierz[0][j] = j
+
+    for i in range(1, len1 + 1):
+        for j in range(1, len2 + 1):
+            if napis1[i - 1] == napis2[j - 1]:
+                macierz[i][j] = macierz[i - 1][j - 1]
+            else:
+                macierz[i][j] = min(
+                    macierz[i - 1][j] + 1,  # Usunięcie
+                    macierz[i][j - 1] + 1,  # Wstawienie
+                    macierz[i - 1][j - 1] + 2,  # Zamiana
+                )
+    print("Macierz Levenshteina:")
+    rich.print(macierz)
+
+    return macierz[len(napis1)][len(napis2)]
+
+
+def guess(napis: str, lista: list[str]) -> str:
+    """Funkcja zgaduje, który z napisów jest najbardziej podobny do podanego."""
+    odleglosci = [(levenshtein(napis, slowo), slowo) for slowo in lista]
+    odleglosci.sort()
+    min_odleglosci = odleglosci[0][0]
+    return [slowo for odleglosc, slowo in odleglosci if odleglosc == min_odleglosci]
+
+
+def zad_2() -> None:
+    """Funkcja testująca odległość Levenshteina."""
+    napis_1 = "Ala"
+    napis_2 = "Olek"
+    print(
+        f"Odległość Levenshteina między '{napis_1}' a '{napis_2}': "
+        f"{levenshtein(napis_1, napis_2)}",
+    )
+
+    print("Zgadnij, który z napisów jest najbardziej podobny do 'Ala':")
+    lista = ["Olek", "Ola", "Ala ma kota"]
+    print("Lista:", lista)
+    print("Najbardziej podobne napisy:")
+    podobne_napisy = guess("Ala", lista)
+    rich.print(podobne_napisy)
+
+
 if __name__ == "__main__":
     test_koduj()
     test_dekoduj()
     zad_1()
+
+    zad_2()
