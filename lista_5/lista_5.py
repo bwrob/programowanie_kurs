@@ -324,13 +324,16 @@ def zad_3():
     log.info(
         "znaleziono %s rozwiazań dlugości %s :\n%s",
         len(znalezione),
-        len(list(znalezione)[0]) if znalezione else 0,
+        len(next(iter(znalezione))) if znalezione else 0,
         znalezione,
     )
 
 
 if __name__ == "__main__":
     log.setLevel(INFO)
-    # zad_1()
-    # zad_2()
-    zad_3()
+    for zadanie in [zad_1, zad_2, zad_3]:
+        log.info("Zadanie %s".center(20), zadanie.__name__)
+        start = time.perf_counter()
+        zadanie()
+        end = time.perf_counter()
+        log.info("Czas wykonania: %s. \n\n\n", round(end - start, 4))
