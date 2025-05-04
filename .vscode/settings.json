@@ -66,23 +66,12 @@
     "markdown.preview.scrollEditorWithPreview": true,
     "markdown.preview.scrollPreviewWithEditor": true,
     "notebook.formatOnSave.enabled": true,
-    "python.analysis.autoSearchPaths": true,
-    "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
     "python.envFile": "${workspaceFolder}/.env",
     "python.languageServer": "Default",
     "python.poetryPath": "poetry",
-    "python.testing.autoTestDiscoverOnSaveEnabled": true,
-    "python.testing.pytestArgs": [
-        "tests"
-    ],
-    "python.testing.pytestEnabled": true,
-    "python.testing.unittestEnabled": false,
-    "quarto.render.renderOnSave": true,
-    "quarto.usePipQuarto": true,
     "ruff.configuration": "ruff.toml",
     "ruff.configurationPreference": "filesystemFirst",
     "terminal.integrated.defaultProfile.windows": "GitBash",
-    "terminal.integrated.fontSize": 10,
     "terminal.integrated.mouseWheelZoom": true,
     "terminal.integrated.profiles.windows": {
         "CommandPrompt": {
@@ -106,7 +95,6 @@
     "terminal.integrated.tabs.hideCondition": "never",
     "terminal.integrated.tabs.location": "right",
     "window.commandCenter": false,
-    "window.zoomLevel": 1,
     "workbench.activityBar.location": "top",
     "workbench.colorTheme": "PyCharm Night Theme",
     "workbench.editor.enablePreview": false,
@@ -115,7 +103,9 @@
     "workbench.preferredDarkColorTheme": "PyCharm Night Theme",
     "workbench.settings.editor": "json",
     "workbench.sideBar.location": "right",
-    "workbench.tree.indent": 16,
+    "workbench.tree.indent": 8,
     "workbench.tree.renderIndentGuides": "always",
-    "zenMode.fullScreen": false
+    "zenMode.fullScreen": false,
+    "window.zoomLevel": 1,
+    "terminal.integrated.fontSize": 10
 }

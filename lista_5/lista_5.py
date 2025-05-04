@@ -208,8 +208,8 @@ def guess(napis: str, lista: list[str]) -> str:
 
 def zad_2(*, perf_test: int = False) -> None:
     """Funkcja testująca odległość Levenshteina."""
-    napis_1 = "Ala ma kota i wspierających rodziców."
-    napis_2 = "Olek ma dom, samochód i bogatych rodziców."
+    napis_1 = "Ala ma kota."
+    napis_2 = "Olek ma psa."
 
     if perf_test:
         iterations = 100
@@ -330,8 +330,8 @@ def zad_3():
 
 
 if __name__ == "__main__":
-    log.setLevel(INFO)
-    for zadanie in [zad_1, zad_2, zad_3]:
+    log.setLevel(DEBUG)
+    for zadanie in [zad_3]:
         log.info("Zadanie %s".center(20), zadanie.__name__)
         start = time.perf_counter()
         zadanie()
