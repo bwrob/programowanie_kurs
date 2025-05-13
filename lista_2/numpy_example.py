@@ -2,7 +2,7 @@ import numpy as np
 from rich import print
 
 
-def numpy_example():
+def numpy_example() -> None:
     # Utwórz tablicę 1D
     tablica_1d = np.array([1, 2, 3, 4, 5])
     print("Tablica 1D:", tablica_1d)

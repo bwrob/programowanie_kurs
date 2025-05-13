@@ -30,7 +30,7 @@ def rangi(L):
     return rangi_lista
 
 
-def zadanie_1():
+def zadanie_1() -> None:
     L = [1, 5, 2, -1]
     print("Zadanie 1 - Inwersje:", inwersje(L))
     print("Zadanie 1 - Rangi:", rangi(L))
@@ -58,7 +58,7 @@ def sortowanie_zliczanie(
     return posortowana
 
 
-def sortowanie_bąbelkowe(lista, relacja=lambda x, y: x <= y):
+def sortowanie_bąbelkowe(lista, relacja=lambda x, y: x <= y) -> None:
     n = len(lista)
     dalej = True
     i = 0
@@ -71,7 +71,7 @@ def sortowanie_bąbelkowe(lista, relacja=lambda x, y: x <= y):
         i += 1
 
 
-def sortowanie_wstawianie(lista, relacja=lambda x, y: x <= y):
+def sortowanie_wstawianie(lista, relacja=lambda x, y: x <= y) -> None:
     for i in range(1, len(lista)):
         li = lista[i]
         j = i
@@ -81,7 +81,7 @@ def sortowanie_wstawianie(lista, relacja=lambda x, y: x <= y):
         lista[j] = li
 
 
-def sortowanie_wybieranie(lista, relacja=lambda x, y: x <= y):
+def sortowanie_wybieranie(lista, relacja=lambda x, y: x <= y) -> None:
     n = len(lista)
     for i in range(n - 1):
         j = i
@@ -191,7 +191,7 @@ def zmierz_sortowanie(
     return pomiary[serie_median // 2]
 
 
-def zadanie_2():
+def zadanie_2() -> None:
     lista_losowa = [random.choice(range(10)) for _ in range(1000)]
     klucze = list(range(10))
 
@@ -247,7 +247,7 @@ def sortowanie_pozycyjne(lista):
     return lista
 
 
-def zadanie_3():
+def zadanie_3() -> None:
     lista_pozycyjna = [170, 45, 75, 90, 802, 24, 2, 66]
     print("Zadanie 3 - Posortowana lista:", sortowanie_pozycyjne(lista_pozycyjna))
 

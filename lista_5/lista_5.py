@@ -92,14 +92,14 @@ def dekoduj(napis: str, klucz: int = 1) -> str:
     return koduj(napis, -klucz)
 
 
-def test_koduj():
+def test_koduj() -> None:
     assert koduj("A") == "B"
     assert koduj("Z") == "A"
     assert koduj("ALAMAKOTA", 12) == "MXMYMWAFM"
     log.debug("Wszystkie testy przeszły pomyślnie.")
 
 
-def test_dekoduj():
+def test_dekoduj() -> None:
     assert dekoduj("B") == "A"
     assert dekoduj("A") == "Z"
     assert dekoduj("MXMYMWAFM", 12) == "ALAMAKOTA"
@@ -137,7 +137,7 @@ def odległości_dla_kluczy(napis: str) -> dict[int, float]:
     }
 
 
-def zad_1():
+def zad_1() -> None:
     test_koduj()
     test_dekoduj()
 
@@ -319,7 +319,7 @@ def odplatanie(msg: str, slowa: set[str]) -> list[str]:
     return {tuple(sorted(result)) for result in results if len(result) == max_slow}
 
 
-def zad_3():
+def zad_3() -> None:
     znalezione = odplatanie(__PARALLEL_MESSAGE, slowa=__KEYWORDS)
     log.info(
         "znaleziono %s rozwiazań dlugości %s :\n%s",

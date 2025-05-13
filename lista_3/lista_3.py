@@ -4,7 +4,7 @@ from rich import print
 
 
 class SitoEratostenesaCache:
-    def __init__(self):
+    def __init__(self) -> None:
         self._N_DLA_SITA = 2
         self._WYNIK_SITA = [2]
         self._SITO = [None, None, 2]
@@ -139,7 +139,7 @@ def sito_sundarama2(N):
     return [p for p in pierwsze if p < N]
 
 
-def zadanie_1():
+def zadanie_1() -> None:
     n = 10_000
     #print(czyniki_pierwsze(n))
     # print(dzielniki(n))
@@ -148,8 +148,8 @@ def zadanie_1():
     print(liczby_doskonale(n))
 
 
-def zadanie_2():
-    import time 
+def zadanie_2() -> None:
+    import time
     n = 10_000
     methods = [pary_zaprzyjaznione, pary_zaprzyjaznione_cache,]
 
@@ -164,12 +164,12 @@ def zadanie_2():
             total_time += end - start
         avg_time = total_time / m
         print(f"{method.__name__.ljust(padding)}: {str(avg_time).rjust(15)} ns")
-    
+
     #print(pary_zaprzyjaznione(n))
     print(pary_zaprzyjaznione_cache(n))
 
 
-def zadanie_3():
+def zadanie_3() -> None:
     import time
 
     n = 1_000

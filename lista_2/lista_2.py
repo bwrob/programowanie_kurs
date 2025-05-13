@@ -1,4 +1,3 @@
-from functools import reduce
 from math import gcd
 
 import numpy as np

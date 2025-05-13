@@ -1,4 +1,3 @@
-import datetime as dt 
 import logging
 
 from rich.logging import RichHandler
@@ -7,8 +6,8 @@ logger = logging.getLogger("programowanie")
 logger.setLevel(logging.DEBUG)
 
 file_handler = logging.FileHandler(
-    filename=f"log.txt",
-    
+    filename="log.txt",
+
 )
 formatter = logging.Formatter(
     "%(asctime)s - %(name)s - %(levelname)s - %(message)s",
@@ -53,7 +52,7 @@ def sortowanie_pozycyjne(lista):
     return lista
 
 
-def zadanie_3():
+def zadanie_3() -> None:
     logger.info("Zadanie 3 - Sortowanie pozycyjne")
     lista_pozycyjna = [170, 45, 75, 90, 802, 24, 2, 66]
     logger.info(

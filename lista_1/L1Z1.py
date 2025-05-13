@@ -66,6 +66,7 @@ def generate_data(size: int, data_type: str, str_len: int = 1) -> list:
             "".join(random.choices("abcdefghijklmnopqrstuvwxyz", k=str_len))
             for _ in range(size)
         ]
+    return None
 
 
 def plot_results(

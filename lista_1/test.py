@@ -7,9 +7,9 @@ if __name__ == "__main__":
     lista_int = [randint(0,10) for _ in range(n)]
     lista_abc = [choice("abc") for _ in range(n)]
     lista_ab = choices("ab", weights=[5,95], k=n)
-    
+
     print(
         lista_int,
         lista_abc,
-        lista_ab
+        lista_ab,
     )

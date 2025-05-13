@@ -18,23 +18,23 @@ class DualNumber:
         self.dual = float(dual)
 
     def __str__(self) -> str:
-        """Zwraca liczbę dualną jako czytelny napis."""
+        """Zwraca reprezentację łańcuchową liczby dualnej."""
         sign = "+" if self.dual >= 0 else "-"
         return f"{self.real} {sign} {abs(self.dual)}ε"
 
     def __repr__(self) -> str:
-        """Zwraca oficjalną reprezentację liczby dualnej."""
+        """Zwraca oficjalną reprezentację łańcuchową liczby dualnej."""
         return f"DualNumber({self.real}, {self.dual})"
 
-    def __add__(self, other: DualNumber | float) -> DualNumber:
+    def __add__(self, other: DualNumber | int | float) -> DualNumber:
         """Dodaje dwie liczby dualne lub liczbę dualną i liczbę rzeczywistą."""
         if isinstance(other, DualNumber):
             return DualNumber(self.real + other.real, self.dual + other.dual)
-        if isinstance(other, int | float):
+        if isinstance(other, (int, float)):
             return DualNumber(self.real + other, self.dual)
         return NotImplemented
 
-    def __radd__(self, other: DualNumber | float) -> DualNumber:
+    def __radd__(self, other: int | float) -> DualNumber:
         """Obsługuje dodawanie z liczbą rzeczywistą po lewej stronie."""
         return self + other
 
@@ -46,25 +46,25 @@ class DualNumber:
             return DualNumber(self.real - other, self.dual)
         return NotImplemented
 
-    def __rsub__(self, other: float) -> DualNumber:
+    def __rsub__(self, other: int | float) -> DualNumber:
         """Obsługuje odejmowanie z liczbą rzeczywistą po lewej stronie."""
         return DualNumber(other - self.real, -self.dual)
 
-    def __mul__(self, other: DualNumber | float) -> DualNumber:
+    def __mul__(self, other: DualNumber | int | float) -> DualNumber:
         """Mnoży dwie liczby dualne lub liczbę dualną i liczbę rzeczywistą."""
         if isinstance(other, DualNumber):
             real_part = self.real * other.real
             dual_part = (self.real * other.dual) + (self.dual * other.real)
             return DualNumber(real_part, dual_part)
-        if isinstance(other, int | float):
+        if isinstance(other, (int, float)):
             return DualNumber(self.real * other, self.dual * other)
         return NotImplemented
 
-    def __rmul__(self, other: float) -> DualNumber:
+    def __rmul__(self, other: int | float) -> DualNumber:
         """Obsługuje mnożenie z liczbą rzeczywistą po lewej stronie."""
         return self * other
 
-    def __truediv__(self, other: DualNumber | float) -> DualNumber:
+    def __truediv__(self, other: DualNumber | int | float) -> DualNumber:
         """Dzieli dwie liczby dualne lub liczbę dualną i liczbę rzeczywistą."""
         if isinstance(other, DualNumber):
             if other.real == 0:
@@ -74,13 +74,13 @@ class DualNumber:
                 other.real**2
             )
             return DualNumber(real_part, dual_part)
-        if isinstance(other, int | float):
+        if isinstance(other, (int, float)):
             if other == 0:
                 raise ZeroDivisionError("Dzielenie przez zero")
             return DualNumber(self.real / other, self.dual / other)
         return NotImplemented
 
-    def __rtruediv__(self, other: float) -> DualNumber:
+    def __rtruediv__(self, other: int | float) -> DualNumber:
         """Obsługuje dzielenie z liczbą rzeczywistą po lewej stronie."""
         if self.real == 0:
             raise ZeroDivisionError("Dzielenie przez zero")
@@ -88,20 +88,17 @@ class DualNumber:
         dual_part = (0 - other * self.dual) / (self.real**2)
         return DualNumber(real_part, dual_part)
 
-    def __pow__(self, n: float) -> DualNumber:
-        """Podnosi liczbę dualną do potęgi n.
-
-        (n jest liczbą całkowitą lub zmiennoprzecinkową).
-        """
-        if isinstance(n, int | float):
+    def __pow__(self, n: int | float) -> DualNumber:
+        """Podnosi liczbę dualną do potęgi n (n jest liczbą całkowitą lub zmiennoprzecinkową)."""
+        if isinstance(n, (int, float)):
             real_part = self.real**n
             dual_part = n * (self.real ** (n - 1)) * self.dual
             return DualNumber(real_part, dual_part)
         return NotImplemented
 
-    def __rpow__(self, other: float) -> DualNumber:
+    def __rpow__(self, other: int | float) -> DualNumber:
         """Obsługuje przypadek, gdy liczba rzeczywista jest podnoszona do potęgi liczby dualnej."""
-        if isinstance(other, int | float):
+        if isinstance(other, (int, float)):
             real_part = other**self.real
             dual_part = real_part * math.log(other) * self.dual
             return DualNumber(real_part, dual_part)
@@ -122,28 +119,20 @@ class DualNumber:
         return not self == other
 
     def __int__(self) -> int:
-        """Konwertuje liczbę dualną na liczbę całkowitą.
-
-        Zwraca część rzeczywistą.
-        """
+        """Konwertuje liczbę dualną na liczbę całkowitą (zwraca część rzeczywistą)."""
         return int(self.real)
 
     def __float__(self) -> float:
-        """Konwertuje liczbę dualną na liczbę zmiennoprzecinkową.
-
-        Zwraca część rzeczywistą.
-        """
+        """Konwertuje liczbę dualną na liczbę zmiennoprzecinkową (zwraca część rzeczywistą)."""
         return float(self.real)
 
     @staticmethod
     def sqrt(z: DualNumber) -> DualNumber:
         """Oblicza pierwiastek kwadratowy z liczby dualnej."""
         if z.real < 0:
-            msg = (
-                "Pierwiastek kwadratowy z ujemnej części rzeczywistej nie jest "
-                "zdefiniowany dla liczb dualnych w tej implementacji"
+            raise ValueError(
+                "Pierwiastek kwadratowy z ujemnej części rzeczywistej nie jest zdefiniowany dla liczb dualnych w tej implementacji",
             )
-            raise ValueError(msg)
         real_part = math.sqrt(z.real)
         dual_part = z.dual / (2 * real_part) if real_part != 0 else 0
         return DualNumber(real_part, dual_part)
