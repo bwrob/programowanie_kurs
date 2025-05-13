@@ -1,15 +1,22 @@
+import datetime as dt 
 import logging
 
-logging.basicConfig(level=logging.DEBUG)
+from rich.logging import RichHandler
+
 logger = logging.getLogger("programowanie")
-logger.setLevel(logging.INFO)
+logger.setLevel(logging.DEBUG)
 
 file_handler = logging.FileHandler(
-    filename="log.txt",
+    filename=f"log.txt",
+    
 )
+formatter = logging.Formatter(
+    "%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+)
+file_handler.setFormatter(formatter)
 file_handler.setLevel(logging.DEBUG)
 
-console_handler = logging.StreamHandler()
+console_handler = RichHandler()
 console_handler.setLevel(logging.INFO)
 
 logger.addHandler(file_handler)
@@ -37,18 +44,24 @@ def sortowanie_zliczanie_cyfra(lista, cyfra):
         pozycje[cyfra_elementu] += 1
     return posortowana
 
-
 def sortowanie_pozycyjne(lista):
     maksimum = max(lista)
     liczba_cyfr = len(str(maksimum))
     for cyfra in range(liczba_cyfr):
+        logger.debug(f"Sortowanie cyfra: {cyfra}")
         lista = sortowanie_zliczanie_cyfra(lista, cyfra)
     return lista
 
 
 def zadanie_3():
+    logger.info("Zadanie 3 - Sortowanie pozycyjne")
     lista_pozycyjna = [170, 45, 75, 90, 802, 24, 2, 66]
-    logger.info(f"Zadanie 3 - Posortowana lista: { sortowanie_pozycyjne(lista_pozycyjna)}")
-
+    logger.info(
+        f"Lista do posortowania: {lista_pozycyjna}",
+    )
+    posortowana = sortowanie_pozycyjne(lista_pozycyjna)
+    logger.info(
+        f"Posortowana lista: {posortowana}",
+    )
 if __name__ == "__main__":
     zadanie_3()
