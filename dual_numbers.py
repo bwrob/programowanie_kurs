@@ -30,7 +30,7 @@ class DualNumber:
         """Dodaje dwie liczby dualne lub liczbę dualną i liczbę rzeczywistą."""
         if isinstance(other, DualNumber):
             return DualNumber(self.real + other.real, self.dual + other.dual)
-        if isinstance(other, (int, float)):
+        if isinstance(other, int | float):
             return DualNumber(self.real + other, self.dual)
         return NotImplemented
 
@@ -68,22 +68,25 @@ class DualNumber:
         """Dzieli dwie liczby dualne lub liczbę dualną i liczbę rzeczywistą."""
         if isinstance(other, DualNumber):
             if other.real == 0:
-                raise ZeroDivisionError("Dzielenie przez zero")
+                msg = "Dzielenie przez zero"
+                raise ZeroDivisionError(msg)
             real_part = self.real / other.real
             dual_part = (self.dual * other.real - self.real * other.dual) / (
                 other.real**2
             )
             return DualNumber(real_part, dual_part)
-        if isinstance(other, (int, float)):
+        if isinstance(other, int | float):
             if other == 0:
-                raise ZeroDivisionError("Dzielenie przez zero")
+                msg = "Dzielenie przez zero"
+                raise ZeroDivisionError(msg)
             return DualNumber(self.real / other, self.dual / other)
         return NotImplemented
 
     def __rtruediv__(self, other: int | float) -> DualNumber:
         """Obsługuje dzielenie z liczbą rzeczywistą po lewej stronie."""
         if self.real == 0:
-            raise ZeroDivisionError("Dzielenie przez zero")
+            msg = "Dzielenie przez zero"
+            raise ZeroDivisionError(msg)
         real_part = other / self.real
         dual_part = (0 - other * self.dual) / (self.real**2)
         return DualNumber(real_part, dual_part)
@@ -130,8 +133,9 @@ class DualNumber:
     def sqrt(z: DualNumber) -> DualNumber:
         """Oblicza pierwiastek kwadratowy z liczby dualnej."""
         if z.real < 0:
+            msg = "Pierwiastek kwadratowy z ujemnej części rzeczywistej nie jest zdefiniowany dla liczb dualnych w tej implementacji"
             raise ValueError(
-                "Pierwiastek kwadratowy z ujemnej części rzeczywistej nie jest zdefiniowany dla liczb dualnych w tej implementacji",
+                msg,
             )
         real_part = math.sqrt(z.real)
         dual_part = z.dual / (2 * real_part) if real_part != 0 else 0
