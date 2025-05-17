@@ -45,7 +45,7 @@ class DualNumber:
         """Odejmuje dwie liczby dualne lub liczbę dualną i liczbę rzeczywistą."""
         if isinstance(other, DualNumber):
             return DualNumber(self.real - other.real, self.dual - other.dual)
-        if isinstance(other, (int, float)):
+        if isinstance(other, int | float):
             return DualNumber(self.real - other, self.dual)
         return NotImplemented
 
@@ -59,7 +59,7 @@ class DualNumber:
             real_part = self.real * other.real
             dual_part = (self.real * other.dual) + (self.dual * other.real)
             return DualNumber(real_part, dual_part)
-        if isinstance(other, (int, float)):
+        if isinstance(other, int | float):
             return DualNumber(self.real * other, self.dual * other)
         return NotImplemented
 
@@ -96,7 +96,7 @@ class DualNumber:
 
     def __pow__(self, n: float) -> DualNumber:
         """Podnosi liczbę dualną do potęgi n (n jest liczbą całkowitą lub zmiennoprzecinkową)."""
-        if isinstance(n, (int, float)):
+        if isinstance(n, int | float):
             real_part = self.real**n
             dual_part = n * (self.real ** (n - 1)) * self.dual
             return DualNumber(real_part, dual_part)
@@ -104,7 +104,7 @@ class DualNumber:
 
     def __rpow__(self, other: float) -> DualNumber:
         """Obsługuje przypadek, gdy liczba rzeczywista jest podnoszona do potęgi liczby dualnej."""
-        if isinstance(other, (int, float)):
+        if isinstance(other, int | float):
             real_part = other**self.real
             dual_part = real_part * math.log(other) * self.dual
             return DualNumber(real_part, dual_part)

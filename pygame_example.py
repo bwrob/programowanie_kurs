@@ -6,52 +6,52 @@ import pygame
 OKNO_SZER = 800
 OKNO_WYS = 600
 FPS = 60
- 
+
 PALETKA_WYS = 80
 PALETKA_SZER = 20
 PIŁKA_R = 10
 SPEED = 5
- 
+
 STOP_PLAY = 5
- 
+
 PALETKA = (255, 255, 255)
 PIŁKA = (255, 255, 255)
 TŁO = (0, 0, 0)
 TEKST = (127, 127, 127)
 WINNER = (127, 255, 127)
 LOOSER = (255, 127, 127)
- 
+
 pygame.init()
 okienko = pygame.display.set_mode((OKNO_SZER, OKNO_WYS), 0, 32)
 pygame.display.set_caption("Przykład Ponga")
 zegarek = pygame.time.Clock()
-font = pygame.font.SysFont('Arial', 64)
- 
+font = pygame.font.SysFont("Arial", 64)
+
 gracz1 = pygame.Rect(0, OKNO_WYS//2-PALETKA_WYS//2, PALETKA_SZER, PALETKA_WYS)
 gracz2 = pygame.Rect(OKNO_SZER-PALETKA_SZER, OKNO_WYS//2-PALETKA_WYS//2, PALETKA_SZER, PALETKA_WYS)
- 
+
 gracz1_speed = 0
 gracz2_speed = 0
 piłka_x = OKNO_SZER//2
 piłka_y = OKNO_WYS//2
 piłka_dx = 0
 piłka_dy = 0
- 
-def nowa_piłka():
+
+def nowa_piłka() -> None:
     global piłka_x, piłka_y, piłka_dx, piłka_dy
     phi = uniform(-pi/3, pi/3)
     piłka_x = OKNO_SZER//2
     piłka_y = OKNO_WYS//2
     piłka_dx = SPEED * choice([-1, 1]) * cos(phi)
     piłka_dy = SPEED * sin(phi)
- 
+
 nowa_piłka()
- 
+
 gracz1_wynik = 0
 gracz2_wynik = 0
 gracz1_text = font.render("0", True, TEKST)
 gracz2_text = font.render("0", True, TEKST)
- 
+
 graj = True
 while graj:
     for zdarzenie in pygame.event.get():
@@ -75,7 +75,7 @@ while graj:
                 gracz2_speed += SPEED
             elif zdarzenie.key == pygame.K_DOWN:
                 gracz2_speed -= SPEED
- 
+
     gracz1.y += gracz1_speed
     if gracz1.y < 0:
         gracz1.y = 0
@@ -86,10 +86,10 @@ while graj:
         gracz2.y = 0
     elif gracz2.y > OKNO_WYS-PALETKA_WYS:
         gracz2.y = OKNO_WYS-PALETKA_WYS
- 
+
     piłka_x += piłka_dx
     piłka_y += piłka_dy
- 
+
     if piłka_y < PIŁKA_R:
         wystaje = PIŁKA_R-piłka_y
         piłka_y = PIŁKA_R+wystaje
@@ -130,15 +130,15 @@ while graj:
             else:
                 gracz1_text = font.render(str(gracz1_wynik), True, TEKST)
             nowa_piłka()
- 
+
     okienko.fill(TŁO)
     okienko.blit(gracz1_text, (40, 40))
     okienko.blit(gracz2_text, (OKNO_SZER-40-gracz2_text.get_rect().width, 40))
     pygame.draw.rect(okienko, PALETKA, gracz1)
     pygame.draw.rect(okienko, PALETKA, gracz2)
     pygame.draw.circle(okienko, PIŁKA, (piłka_x, piłka_y), PIŁKA_R)
- 
+
     pygame.display.update()
     zegarek.tick(FPS)
- 
+
 pygame.quit()

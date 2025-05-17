@@ -20,7 +20,7 @@
         matplotlib   = "*"
         numpy        = "*"
         pandas       = "*"
-    pygame = "^2.6.1"
+        pygame       = "^2.6.1"
 
 
 [tool.docformatter]
@@ -36,8 +36,8 @@
     typeCheckingMode = "all"
 
 [tool.ruff]
-    line-length    = 80
-    target-version = "py312"
+    line-length    = 88
+    target-version = "py313"
 
     [tool.ruff.lint]
         select = ["ALL"]

@@ -48,12 +48,8 @@ def get_next_generation(grid: np.ndarray) -> np.ndarray:
             r_end = min(GRID_HEIGHT, r + 2)
             c_start = max(0, c - 1)
             c_end = min(GRID_WIDTH, c + 2)
-
             # Policz żywych sąsiadów
-            live_neighbors = (
-                np.sum(grid[r_start:r_end, c_start:c_end]) - grid[r, c]
-            )
-
+            live_neighbors = np.sum(grid[r_start:r_end, c_start:c_end]) - grid[r, c]
             # Zastosuj reguły Gry w Życie
             if grid[r, c] == 1:  # Komórka żywa
                 if live_neighbors < 2 or live_neighbors > 3:
