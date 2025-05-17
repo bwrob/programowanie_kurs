@@ -51,10 +51,10 @@ def get_next_generation(grid: np.ndarray) -> np.ndarray:
             # Policz żywych sąsiadów
             live_neighbors = np.sum(grid[r_start:r_end, c_start:c_end]) - grid[r, c]
             # Zastosuj reguły Gry w Życie
-            if grid[r, c] == 1:  # Komórka żywa
-                if live_neighbors < 2 or live_neighbors > 3:
+            if grid[r, c]:  # Komórka żywa
+                if live_neighbors not in (2, 3):
                     new_grid[r, c] = 0  # Umiera
-            elif live_neighbors == 3:
+            elif live_neighbors == 3:  # Komórka martwa
                 new_grid[r, c] = 1  # Ożywa
     return new_grid
 
@@ -112,14 +112,13 @@ def game_event_loop() -> None:
         pygame.display.flip()
         clock.tick(fps)
 
-    pygame.quit()
-
 
 def main() -> None:
     """Główna funkcja uruchamiająca Grę w Życie."""
     pygame.init()
     pygame.display.set_caption("Conway's Game of Life")
     game_event_loop()
+    pygame.quit()
 
 
 if __name__ == "__main__":
