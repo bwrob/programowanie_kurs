@@ -106,6 +106,6 @@
     "workbench.tree.indent": 8,
     "workbench.tree.renderIndentGuides": "always",
     "zenMode.fullScreen": false,
-    "window.zoomLevel": 1,
-    "terminal.integrated.fontSize": 10
+    "window.zoomLevel": 3,
+    "terminal.integrated.fontSize": 14
 }

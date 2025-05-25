@@ -1,0 +1,18 @@
+line-length    = 79
+target-version = "py312"
+
+[lint]
+    select = ["ALL"]
+    ignore = [
+        "COM",
+        "D203",
+        "D211",
+        "D213",
+        "FA",
+        "ISC",
+        "T",
+        "TC",
+    ]
+
+[format]
+    docstring-code-format = true
